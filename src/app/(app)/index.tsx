@@ -11,11 +11,9 @@ import Shipping from '@/assets/shipping.svg';
 import { Header, ServiceCard } from "@/components/Screens/Home";
 
 export default function Home() {
-    const router = useRouter();
-
     const [pathname, setPathname] = useState('');
 
-    console.warn('pathname', pathname);
+    const router = useRouter();
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
