@@ -21,7 +21,7 @@ export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
         })();
     }, []);
 
-    const handleScan = () => {
+    const handleOpenScan = () => {
         setOpen(!open);
     };
 
@@ -37,12 +37,12 @@ export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
             <FAB
                 icon={() => <Icon name="QrCode" size={24} color={theme.colors.white} />}
                 style={[styles.fab, { bottom: 16 }]}
-                onPress={handleScan}
+                onPress={handleOpenScan}
                 mode="flat"
             />
 
             { open &&
-                <QrCodeScanner onChangeData={onChangeData} />
+                <QrCodeScanner onChangeData={onChangeData} onClose={() => setOpen(false)} />
             }
         </>
     );

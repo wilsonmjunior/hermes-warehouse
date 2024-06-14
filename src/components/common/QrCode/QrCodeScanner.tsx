@@ -16,15 +16,16 @@ type BarCodeScannedParams = {
 
 type QrCodeScannerProps = {
     onChangeData(value: string): void;
+    onClose(): void;
 };
 
-export function QrCodeScanner({ onChangeData }: QrCodeScannerProps) {
+export function QrCodeScanner({ onChangeData, onClose }: QrCodeScannerProps) {
     const [scanned, setScanned] = useState(false);
 
     const handleBarCodeScanned = ({ type, data }: BarCodeScannedParams) => {
-        console.warn('data:: ', type, data);
         setScanned(true);
         onChangeData(data);
+        onClose();
     };
 
     return (
@@ -33,6 +34,7 @@ export function QrCodeScanner({ onChangeData }: QrCodeScannerProps) {
                 title="Escanear QR Code"
                 textColor={theme.colors.white}
                 style={styles.header}
+                onPress={onClose}
             />
 
             <View style={[styles.scannerContainer]}>
