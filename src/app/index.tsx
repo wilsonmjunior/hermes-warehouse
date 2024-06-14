@@ -1,5 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+import Logo from '@/assets/icons/logo.png';
 
 import { Button, Input, InputPassword } from "@/components/common";
 import { router } from "expo-router";
@@ -7,6 +9,10 @@ import { router } from "expo-router";
 export default function SignIn() {
     return (
         <SafeAreaView style={{ flex: 1 }}>
+            <View style={styles.logo}>
+                <Image source={Logo} />
+            </View>
+
             <View style={styles.content}>
                 <Input placeholder="Email" />
                 <InputPassword placeholder="Senha" onPress={() => { }} />
@@ -28,5 +34,10 @@ const styles = StyleSheet.create({
     },
     buttons: {
         marginTop: 8
+    },
+    logo: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
