@@ -33,8 +33,8 @@ export function ProfileImageUploader({
         }}
         style={styles.button}
       >
-        <Icon name="Images" size={24} color={theme.colors.gray[350]} />
-        <Text>Escolher da Galeria</Text>
+        <Icon name="Images" size={24} color={theme.colors.title[600]} />
+        <Text style={styles.text}>Escolher da Galeria</Text>
       </Pressable>
       <Pressable
         onPress={() => {
@@ -43,8 +43,8 @@ export function ProfileImageUploader({
         }}
         style={styles.button}
       >
-        <Icon name="Camera" size={24} color={theme.colors.gray[350]} />
-        <Text>Tirar Foto</Text>
+        <Icon name="Camera" size={24} color={theme.colors.title[600]} />
+        <Text style={styles.text}>Tirar Foto</Text>
       </Pressable>
     </BottomModal>
   );
@@ -56,4 +56,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 8,
   },
+  text: {
+    color: theme.colors.title[600],
+  }
 });
