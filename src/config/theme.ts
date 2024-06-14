@@ -58,7 +58,6 @@ export const theme = {
   colors: {
     ...DefaultTheme.colors,
     accent: "#65A3B8",
-
     primary: {
       100: '#E4F2F5',
       200: '#C9E5EB',
@@ -69,18 +68,6 @@ export const theme = {
       700: '#3F6970',
       800: '#2C4B4D',
       900: '#192E2A',
-    },
-
-    secondary: {
-      100: '#E6F7EE',
-      200: '#CDEFD8',
-      300: '#B2E6C1',
-      400: '#99DEAB',
-      500: '#7BC8A4',
-      600: '#62B292',
-      700: '#499B7F',
-      800: '#31756C',
-      900: '#184E59',
     },
 
     title: {
