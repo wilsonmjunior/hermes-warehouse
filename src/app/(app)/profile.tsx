@@ -4,14 +4,17 @@ import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
+    Button,
     Header,
-  IconType,
-  MenuItem,
-  ProfileImageUploader,
-  ProfilePicture,
+    Icon,
+    IconType,
+    MenuItem,
+    ProfileImageUploader,
+    ProfilePicture,
 } from "@/components/common";
-
+import { useProfileController } from "@/components/Screens/Profile";
 import { theme } from "@/config/theme";
+import { useSession } from "@/context";
 import { getStatusBarHeight } from "@/utils/status-bottom";
 
 type ListItem = {
@@ -25,15 +28,12 @@ type ListItem = {
 export default function Profile() {
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
-//   const {
-//     imageUri,
-//     simpleName,
-//     userProperties,
-//     handlePickImage,
-//     handleTakePhoto,
-//   } = useProfileController();
+  const {
+    handlePickImage,
+    handleTakePhoto,
+  } = useProfileController();
 
-//   const { signOut } = useSession();
+  const { signOut } = useSession();
 
   const handleToggleChangeImageModal = () => {
     bottomSheetModalRef.current?.present();
@@ -68,8 +68,8 @@ export default function Profile() {
 
         <View style={styles.content}>
             <ProfilePicture
-                image={'imageUri'}
-                name={'simpleName'}
+                image={undefined}
+                name={'UT'}
                 onOpenChangeImageModal={handleToggleChangeImageModal}
             />
 
@@ -82,13 +82,21 @@ export default function Profile() {
                     page={page}
                 />
             ))}
+
+            <View style={styles.buttons}>
+                <Button
+                    label="Sair"
+                    icon={(props) => <Icon name="SignOut" size={24} color={theme.colors.white} />}
+                    onPress={signOut}
+                />
+            </View>
         </View>
 
         <ProfileImageUploader
             bottomSheetModalRef={bottomSheetModalRef}
             onClose={() => bottomSheetModalRef.current?.dismiss()}
-            // onPickImage={handlePickImage}
-            // onTakePhoto={handleTakePhoto}
+            onPickImage={handlePickImage}
+            onTakePhoto={handleTakePhoto}
         />
     </SafeAreaView>
   );
@@ -100,7 +108,12 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
   },
   content: {
+    flex: 1,
     marginTop: getStatusBarHeight + 24,
     marginHorizontal: 16,
   },
+  buttons: {
+    flex: 1,
+    justifyContent: 'flex-end'
+  }
 });
