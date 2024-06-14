@@ -10,9 +10,10 @@ import {
   Inter_700Bold,
   useFonts
 } from "@expo-google-fonts/inter";
+import Toast from "react-native-toast-message";
 
 import { theme } from "@/config/theme";
-import Toast from "react-native-toast-message";
+import { SessionProvider } from "@/context";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,7 +38,9 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme}>
-        <Slot />
+        <SessionProvider>
+            <Slot />
+        </SessionProvider>
         <Toast />
       </PaperProvider>
     </GestureHandlerRootView>
