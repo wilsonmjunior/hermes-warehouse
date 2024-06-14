@@ -12,6 +12,7 @@ import {
 } from "@expo-google-fonts/inter";
 
 import { theme } from "@/config/theme";
+import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -22,7 +23,7 @@ export default function RootLayout() {
     Inter_600SemiBold,
     Inter_700Bold,
   });
-    
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync();
@@ -37,6 +38,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme}>
         <Slot />
+        <Toast />
       </PaperProvider>
     </GestureHandlerRootView>
   )
