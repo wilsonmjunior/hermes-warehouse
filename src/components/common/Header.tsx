@@ -10,22 +10,24 @@ import { Icon } from "./Icon";
 type HeaderProps = {
     title: string;
     back?: boolean;
+    style?: any
+    textColor?: string;
     onPress?: () => void;
 }
 
-export function Header({ title, back = true, onPress }: HeaderProps) {
+export function Header({ title, back = true, style, textColor, onPress }: HeaderProps) {
     const handleNavigate  = () => {
         onPress ? onPress() : router.back();
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             { back ? (
                 <BorderlessButton onPress={handleNavigate}>
-                    <Icon name="ArrowLeft" size={18} />
+                    <Icon name="ArrowLeft" size={22} color={textColor} />
                 </BorderlessButton>
             ) : null }
-            <Text style={styles.title}>{title}</Text>
+            <Text variant="titleMedium" style={[styles.title, { color: textColor }]}>{title}</Text>
         </View>
     )
 }
