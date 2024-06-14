@@ -6,24 +6,21 @@ import { BorderlessButton } from "react-native-gesture-handler";
 import { Avatar, Text } from "react-native-paper";
 
 type HeaderProps = {
+    username?: string;
 }
 
-export function Header({  }: HeaderProps) {
-    const handleNotifications  = () => {
-        router.navigate('notifications')
-    }
-
+export function Header({ username }: HeaderProps) {
     return (
         <View style={styles.container}>
             <View style={styles.profile}>
-                <BorderlessButton onPress={handleNotifications}>
+                <BorderlessButton onPress={() => router.push('profile')}>
                     <Icon name="UserCircle" size={24} color={theme.colors.title[800]} />
                 </BorderlessButton>
 
                 <Text variant="titleSmall" style={styles.title}>Wilson Junior</Text>
             </View>
 
-            <BorderlessButton onPress={handleNotifications}>
+            <BorderlessButton onPress={() => router.push('notifications')}>
                 <Icon name="Bell" size={24} color={theme.colors.title[800]} />
             </BorderlessButton>
         </View>
