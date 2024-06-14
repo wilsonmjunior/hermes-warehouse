@@ -1,3 +1,14 @@
-// login/?v_usuario=suporte@tecmil.com.br&v_senha=3318813ee21eaf7b6f45a31965e9085f
+import api from '../api';
 
-// Login: suporte@tecmil.com.br Senha: tecmil
+type AuthSignResponse = {
+    error: string;
+};
+
+export async function authSignIn(username: string, password: string) {
+    try {
+        const response = await api.post<AuthSignResponse, any>('login', { v_usuario: username, v_senha: password });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}
