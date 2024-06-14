@@ -1,12 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { router } from "expo-router";
-import Toast from "react-native-toast-message";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { authSignIn } from "@/infra/services/auth.service";
+import { Auth, authSignIn } from "@/infra/services/auth.service";
+import { PROMETHEUS_SESSION } from "@/constants";
 
 type SessionData = {
-    authSession?: string;
+    authSession?: Auth;
     signIn(username: string, password: string): Promise<void>;
     signOut(): void;
 }
@@ -18,20 +18,18 @@ type SessionProviderProps = {
 export const SessionContext = createContext({} as SessionData);
 
 export function SessionProvider({ children }: SessionProviderProps) {
-    const [authSession, setAuthSession] = useState<string>();
+    const [authSession, setAuthSession] = useState<Auth>();
 
     const signIn = useCallback(async (username: string, password: string) => {
         try {
             const response = await authSignIn(username, password);
-            console.warn('response: ', response);
-
             if (response?.error) {
                 throw response;
             }
 
-            // setAuthSession(response.data);
-            // await AsyncStorage.setItem('@Prometheus:session', JSON.stringify(response));
-            router.push('/');
+            setAuthSession(response.success?.auth);
+            await AsyncStorage.setItem(PROMETHEUS_SESSION, JSON.stringify(response.success?.auth));
+            router.push('(app)');
         } catch (error) {
             console.warn('error:: ', error.error);
             throw error;
@@ -45,7 +43,16 @@ export function SessionProvider({ children }: SessionProviderProps) {
     }, [])
 
     useEffect(() => {
-        // load user data
+        async function load() {
+            const response = await AsyncStorage.getItem(PROMETHEUS_SESSION);
+            if (response) {
+                const authData = JSON.parse(response);
+                setAuthSession(authData);
+                router.push('(app)')
+            }
+        }
+
+        load();
     }, [])
 
     return (

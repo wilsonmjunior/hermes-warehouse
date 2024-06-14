@@ -1,12 +1,12 @@
-import { Stack, router } from "expo-router";
+import { Redirect, Stack } from "expo-router";
 
 import { useSession } from "@/context";
 
 export default function HomeLayout() {
     const { authSession } = useSession();
 
-    if (!authSession) {
-        return router.push('/')
+    if (!authSession?.access_token) {
+        return <Redirect href="/" />;
     }
 
     return (

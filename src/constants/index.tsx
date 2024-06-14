@@ -1,0 +1,6 @@
+const PROMETHEUS = "@PROMETHEUS";
+const PROMETHEUS_SESSION=`${PROMETHEUS}:session`;
+
+export {
+    PROMETHEUS_SESSION,
+};
