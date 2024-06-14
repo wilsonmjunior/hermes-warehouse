@@ -2,7 +2,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 
 import { Header, QrCodeButton } from "@/components/common";
-import { ExpeditionDetails } from "@/components/Screens/Expedition";
+import { PickingDetails } from "@/components/Screens/Separation";
 import { theme } from "@/config/theme";
 
 export default function Separation() {
@@ -10,7 +10,7 @@ export default function Separation() {
         <SafeAreaView style={styles.container}>
             <Header title="Separação" />
 
-            <ExpeditionDetails order={{ customerName: 'João', id: '123', orderDate: '2020-01-01' }} />
+            <PickingDetails />
 
             <QrCodeButton />
         </SafeAreaView>
