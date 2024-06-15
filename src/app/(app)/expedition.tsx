@@ -1,29 +1,56 @@
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useCallback, useState } from "react";
 import { StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 
-import { Header, QrCodeButton } from "@/components/common";
+import { Header, Loading, QrCodeButton } from "@/components/common";
 import { ExpeditionDetails } from "@/components/Screens/Expedition";
 import { theme } from "@/config/theme";
+import { Order, getFullOrder } from "@/infra/services/order.service";
 
-export default function Separation() {
-    const handleChangeData = (data: string) => {
+export default function Expedition() {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<Order>();
 
+  async function loadOrder(orderId: string) {
+    try {
+      setLoading(true);
+      const response = await getFullOrder({ orderId });
+      console.warn("full-order: ", response);
+      if (response.error) {
+        Toast.show({
+          text1: "Erro ao buscar dados do pedido.",
+          type: "error",
+          text2: response.error,
+        });
+        return;
+      }
+      setData(response.pedido);
+    } catch (error) {
+    } finally {
+      setLoading(false);
     }
+  }
 
-    return (
-        <SafeAreaView style={styles.container}>
-            <Header title="Expedição" />
+  const handleChangeData = useCallback((data: string) => {
+    setData(undefined);
+    loadOrder(data.replace(" ", ""));
+  }, []);
 
-            <ExpeditionDetails />
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header title="Expedição" />
 
-            <QrCodeButton onChangeData={handleChangeData} />
-        </SafeAreaView>
-    )
+      {data ? <ExpeditionDetails data={data} /> : loading ? <Loading /> : null}
+
+      <QrCodeButton onChangeData={handleChangeData} />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: theme.colors.white,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.white,
+  },
 });
