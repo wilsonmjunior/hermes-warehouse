@@ -1,25 +1,26 @@
-import { theme } from "@/config/theme";
 import { StyleSheet, View } from "react-native";
 
-type CardProps = {
-    children: React.ReactNode;
-}
+import { theme } from "@/config/theme";
 
-export function Card({ children }: CardProps) {
-    return (
-        <View style={styles.container}>
-            {children}
-        </View>
-    )
+type CardProps = {
+  children: React.ReactNode;
+  isColumn?: boolean;
+};
+
+export function Card({ children, isColumn }: CardProps) {
+  const style = !isColumn ? [styles.row, styles.container] : styles.container;
+  return <View style={style}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 16,
-        paddingHorizontal: 20,
-        borderBottomWidth: 0.5,
-        borderColor: theme.colors.gray[100]
-    }
-})
+  container: {
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderBottomWidth: 0.5,
+    borderColor: theme.colors.gray[100],
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+});
