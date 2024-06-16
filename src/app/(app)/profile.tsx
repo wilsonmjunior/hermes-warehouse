@@ -15,7 +15,6 @@ import {
 import { useProfileController } from "@/components/Screens/Profile";
 import { theme } from "@/config/theme";
 import { useSession } from "@/context";
-import { getStatusBarHeight } from "@/utils/status-bottom";
 
 type ListItem = {
   title: string;
@@ -70,15 +69,17 @@ export default function Profile() {
           onOpenChangeImageModal={handleToggleChangeImageModal}
         />
 
-        {profileItems.map(({ title, description, icon, page }) => (
-          <MenuItem
-            key={title}
-            title={title}
-            description={description}
-            icon={icon}
-            page={page}
-          />
-        ))}
+        <View style={styles.menu}>
+          {profileItems.map(({ title, description, icon, page }) => (
+            <MenuItem
+              key={title}
+              title={title}
+              description={description}
+              icon={icon}
+              page={page}
+            />
+          ))}
+        </View>
 
         <View style={styles.buttons}>
           <Button
@@ -108,8 +109,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    marginTop: getStatusBarHeight + 24,
+    marginTop: 24,
     marginHorizontal: 16,
+  },
+  menu: {
+    marginTop: 60,
   },
   buttons: {
     flex: 1,

@@ -17,32 +17,34 @@ export function ProfilePicture({
 }: ProfilePictureProps) {
   return (
     <View style={styles.profilePictureSection}>
-      {image ? (
-        <Avatar.Image size={143} source={{ uri: image }} />
-      ) : (
-        <Avatar.Text
-          size={143}
-          label={name}
-          labelStyle={{
-            color: theme.colors.gray[400],
-            fontFamily: "Poppins_Medium",
-            fontSize: 50,
-          }}
-          theme={{ colors: { primary: theme.colors.gray[100] } }}
-        />
-      )}
-      <View style={styles.addPhotoContainer}>
-        <Pressable
-          onPress={onOpenChangeImageModal}
-          style={styles.addPhotoButton}
-        >
-          <Text style={styles.addPhotoText}>Adicionar foto</Text>
-          <Icon
-            name="PencilSimpleLine"
-            size={16}
-            color={theme.colors.gray[300]}
+      <View style={styles.profilePictureContent}>
+        {image ? (
+          <Avatar.Image
+            size={143}
+            source={{ uri: image }}
+            style={styles.avatar}
           />
-        </Pressable>
+        ) : (
+          <Avatar.Text
+            size={143}
+            label={name}
+            labelStyle={{
+              color: theme.colors.title[600],
+              fontFamily: "Poppins_Medium",
+              fontSize: 50,
+            }}
+            style={styles.avatar}
+            theme={{ colors: { primary: theme.colors.gray[100] } }}
+          />
+        )}
+        <View style={styles.addPhotoContainer}>
+          <Pressable
+            onPress={onOpenChangeImageModal}
+            style={styles.addPhotoButton}
+          >
+            <Icon name="PlusCircle" size={24} color={theme.colors.white} />
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -51,10 +53,30 @@ export function ProfilePicture({
 const styles = StyleSheet.create({
   profilePictureSection: {
     alignItems: "center",
-    marginVertical: 20,
+    justifyContent: "center",
+  },
+  profilePictureContent: {
+    width: 148,
+    height: 148,
+    backgroundColor: theme.colors.primary[500],
+    borderRadius: 74,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  avatar: {
+    borderWidth: 3,
+    borderColor: theme.colors.white,
   },
   addPhotoContainer: {
-    marginTop: 16,
+    position: "absolute",
+    right: 0,
+    bottom: 16,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: theme.colors.title[300],
   },
   addPhotoButton: {
     flexDirection: "row",
