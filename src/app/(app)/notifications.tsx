@@ -45,14 +45,14 @@ export default function Notifications() {
 
   return (
     <SafeAreaView style={styles.container}>
-        <Header title="Notificações" />
-        <FlatList
-            data={notifications}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-            style={styles.list}
-            disableVirtualization
-        />
+      <Header title="Notificações" />
+      <FlatList
+        data={notifications}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        style={styles.list}
+        disableVirtualization
+      />
     </SafeAreaView>
   );
 }

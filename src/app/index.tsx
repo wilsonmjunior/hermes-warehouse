@@ -9,7 +9,6 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 import Logo from "@/assets/icons/logo.png";
 

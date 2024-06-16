@@ -24,7 +24,13 @@ export function InputPassword({
       autoCapitalize="none"
       right={
         <TextInput.Icon
-          icon={() => <Icon name={secureTextEntry ? "Eye" : "EyeSlash"} size={16} color={theme.colors.primary[900]} />}
+          icon={() => (
+            <Icon
+              name={secureTextEntry ? "Eye" : "EyeSlash"}
+              size={16}
+              color={theme.colors.primary[900]}
+            />
+          )}
           size={20}
           onPress={onPress}
         />

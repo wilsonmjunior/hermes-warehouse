@@ -58,5 +58,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: theme.colors.title[600],
-  }
+  },
 });

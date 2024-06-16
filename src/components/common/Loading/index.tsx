@@ -6,7 +6,7 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withRepeat,
-  withTiming
+  withTiming,
 } from "react-native-reanimated";
 import { Spinner } from "phosphor-react-native";
 
@@ -14,7 +14,7 @@ import { theme } from "@/config/theme";
 
 export function Loading() {
   const spin = useSharedValue(0);
-  
+
   const spinAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
       {
@@ -27,11 +27,11 @@ export function Loading() {
     spin.value = withRepeat(
       withTiming(360, {
         duration: 2000,
-        easing: Easing.linear
+        easing: Easing.linear,
       }),
-      -1
-    )
-  }, [])
+      -1,
+    );
+  }, []);
 
   return (
     <Portal>
@@ -47,11 +47,14 @@ export function Loading() {
         }}
       >
         <Animated.View
-          style={[{
-            width: 50,
-            height: 50,
-            marginTop: 36,
-          }, spinAnimatedStyle]}
+          style={[
+            {
+              width: 50,
+              height: 50,
+              marginTop: 36,
+            },
+            spinAnimatedStyle,
+          ]}
         >
           <Spinner size={48} color={theme.colors.primary[600]} weight="bold" />
         </Animated.View>

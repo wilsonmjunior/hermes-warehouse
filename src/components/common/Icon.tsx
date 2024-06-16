@@ -16,11 +16,7 @@ interface IconProps {
   color?: string;
 }
 
-export function Icon({
-  name,
-  size = 24,
-  color = "black",
-}: IconProps) {
+export function Icon({ name, size = 24, color = "black" }: IconProps) {
   const IconComponent = PhosphorIcons[name as PhosphorIconsKeys];
 
   return <IconComponent size={size} color={color} />;

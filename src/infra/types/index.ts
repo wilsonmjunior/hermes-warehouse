@@ -1,3 +1,1 @@
-export type IResponse = {
-
-}
+export type IResponse = {};

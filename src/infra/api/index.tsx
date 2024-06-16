@@ -4,14 +4,18 @@ type Method = "GET" | "POST" | "PUT" | "DELETE";
 
 async function errorResponse(response: Response) {
   const errorData = (await response.json()) as IResponse;
-  console.warn('API Error:', errorData);
+  console.warn("API Error:", errorData);
   return {
     data: "Erro inesperado",
     status: response.status,
   };
 }
 
-async function call<T, Params>(method: Method, url: string, body?: Params): Promise<T> {
+async function call<T, Params>(
+  method: Method,
+  url: string,
+  body?: Params,
+): Promise<T> {
   try {
     let response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/${url}`, {
       method,

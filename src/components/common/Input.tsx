@@ -21,7 +21,7 @@ export function Input({ style, outlineStyle, ...props }: TextInputProps) {
 }
 
 const styles = StyleSheet.create({
-  container:  {
+  container: {
     backgroundColor: theme.colors.white,
     fontSize: 14,
     height: 56,
@@ -30,5 +30,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 0.5,
     borderColor: theme.colors.outline,
-  }
+  },
 });

@@ -5,16 +5,16 @@ import { Header } from "@/components/common";
 import { theme } from "@/config/theme";
 
 export default function Audit() {
-    return (
-        <SafeAreaView style={styles.container}>
-            <Header title="Auditoria" />
-        </SafeAreaView>
-    )
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header title="Auditoria" />
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: theme.colors.white,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.white,
+  },
 });
