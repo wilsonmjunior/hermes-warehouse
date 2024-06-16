@@ -16,7 +16,6 @@ export default function Expedition() {
     try {
       setLoading(true);
       const response = await getFullOrder({ orderId });
-      console.warn("full-order: ", response);
       if (response.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",

@@ -1,6 +1,4 @@
-import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Line, Svg } from "react-native-svg";
 import { Text } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import { router } from "expo-router";
@@ -13,11 +11,6 @@ import { toCamelCaseWithFirstUpper } from "@/utils/camel-case";
 import { ExpeditionTraceability } from "./ExpeditionTraceability";
 
 export function ExpeditionDetails({ data }: { data: Order }) {
-  const parentHeight = useMemo(
-    () => data.itens.length * 96,
-    [data.itens.length],
-  );
-
   const handlePicking = (item: string) => {
     const order = data.id.replace(" ", "");
     router.push(`picking-details/${order}-${item}`);
@@ -51,18 +44,6 @@ export function ExpeditionDetails({ data }: { data: Order }) {
             onPicking={handlePicking}
           />
         ))}
-
-        <Svg height={parentHeight} width="1" style={[styles.dashed]}>
-          <Line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2={parentHeight}
-            stroke="#000"
-            strokeWidth="1"
-            strokeDasharray="4"
-          />
-        </Svg>
       </View>
     </ScrollView>
   );
@@ -85,13 +66,5 @@ const styles = StyleSheet.create({
   },
   traceability: {
     marginTop: 16,
-  },
-  dashed: {
-    borderStyle: "dashed",
-    borderLeftWidth: 1,
-    borderColor: theme.colors.gray[300],
-    position: "absolute",
-    top: 64,
-    left: 28,
   },
 });
