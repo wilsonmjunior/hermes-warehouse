@@ -83,7 +83,7 @@ export default function Profile() {
 
         <View style={styles.buttons}>
           <Button
-            label="Sair"
+            label="Sair do aplicativo"
             icon={(props) => (
               <Icon name="SignOut" size={24} color={theme.colors.white} />
             )}
