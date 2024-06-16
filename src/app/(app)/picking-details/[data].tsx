@@ -16,6 +16,7 @@ type PickingDetailsScreenProps = {
 export default function PickingDetailsScreen() {
   const [orderData, setOrderData] = useState<Order>();
   const [loading, setLoading] = useState(false);
+  const [isPicking, setIsPicking] = useState(true);
 
   const { data } = useLocalSearchParams<PickingDetailsScreenProps>();
 
@@ -30,9 +31,11 @@ export default function PickingDetailsScreen() {
       return;
     }
 
+    setIsPicking(false);
+
     Toast.show({
       text1: "Item localizado com sucesso.",
-      type: "error",
+      type: "success",
     });
   };
 
@@ -70,7 +73,7 @@ export default function PickingDetailsScreen() {
       <Header title="Separação" />
 
       {orderData?.id ? (
-        <PickingDetails data={orderData} />
+        <PickingDetails isPicking={isPicking} data={orderData} />
       ) : loading ? (
         <Loading />
       ) : null}

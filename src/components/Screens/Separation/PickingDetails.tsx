@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
-import { Line, Svg } from "react-native-svg";
 import { Text } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import { router } from "expo-router";
@@ -14,19 +13,16 @@ import {
 import { theme } from "@/config/theme";
 import { Order, getFullOrder } from "@/infra/services/order.service";
 
-export function PickingDetails({ data }: { data: Order }) {
-  const parentHeight = useMemo(
-    () => data.itens.length * 60,
-    [data.itens.length],
-  );
+type PickingDetailsProps = { data: Order; isPicking: boolean };
 
+export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
   const item = useMemo(() => data.itens[0], [data.itens]);
 
   const handlePicking = async () => {
     try {
-      const order = data.id.split("-")[0];
+      const orderId = data.id.replace(" ", "");
       const response = await getFullOrder({
-        orderId: order,
+        orderId,
         item: item.item,
         action: "S",
       });
@@ -58,29 +54,16 @@ export function PickingDetails({ data }: { data: Order }) {
 
       <View style={styles.traceability}>
         {data.itens.map((item, index) => (
-          <PickingTraceability
-            key={index}
-            amount={0}
-            location={item.localizacao}
-            order={item.codigo}
-          />
+          <PickingTraceability key={index} orderItem={item} />
         ))}
 
         <View style={styles.buttons}>
-          <Button label="Separar" onPress={handlePicking} />
-        </View>
-
-        <Svg height={parentHeight} width="1" style={[styles.dashed]}>
-          <Line
-            x1="0"
-            y1="0"
-            x2="0"
-            y2={parentHeight}
-            stroke="#000"
-            strokeWidth="1"
-            strokeDasharray="4"
+          <Button
+            label="Separar"
+            onPress={handlePicking}
+            disabled={isPicking}
           />
-        </Svg>
+        </View>
       </View>
     </View>
   );
@@ -105,13 +88,5 @@ const styles = StyleSheet.create({
   buttons: {
     paddingHorizontal: 20,
     marginTop: 24,
-  },
-  dashed: {
-    borderStyle: "dashed",
-    borderLeftWidth: 1,
-    borderColor: theme.colors.gray[300],
-    position: "absolute",
-    top: 32,
-    left: 28,
   },
 });

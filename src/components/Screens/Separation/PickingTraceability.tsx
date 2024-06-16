@@ -2,20 +2,15 @@ import { StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
 import { theme } from "@/config/theme";
+import { OrderItem } from "@/infra/services/order.service";
 
 import { Icon } from "../../common/Icon";
 
 type TraceabilityProps = {
-  location: string;
-  amount: number;
-  order: string;
+  orderItem: OrderItem;
 };
 
-export function PickingTraceability({
-  location,
-  amount,
-  order,
-}: TraceabilityProps) {
+export function PickingTraceability({ orderItem }: TraceabilityProps) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -27,26 +22,45 @@ export function PickingTraceability({
           <View style={styles.row}>
             <View style={styles.section}>
               <Text variant="titleSmall" style={styles.title}>
+                Item
+              </Text>
+              <Text variant="titleSmall" style={styles.value}>
+                {orderItem.item}
+              </Text>
+            </View>
+            <View style={styles.section}>
+              <Text variant="titleSmall" style={styles.title}>
+                Código
+              </Text>
+              <Text variant="titleSmall" style={styles.value}>
+                {orderItem.codigo}
+              </Text>
+            </View>
+            <View style={styles.section}>
+              <Text variant="titleSmall" style={styles.title}>
+                Saldo
+              </Text>
+              <Text variant="titleSmall" style={styles.value}>
+                {orderItem.saldo}
+              </Text>
+            </View>
+          </View>
+
+          <View style={[styles.row, { justifyContent: "flex-start" }]}>
+            <View style={{ flexGrow: 1 }}>
+              <Text variant="titleSmall" style={styles.title}>
+                Separado
+              </Text>
+              <Text variant="titleSmall" style={styles.value}>
+                {orderItem.qtd_sep}
+              </Text>
+            </View>
+            <View style={{ flexGrow: 2 }}>
+              <Text variant="titleSmall" style={styles.title}>
                 Localização
               </Text>
               <Text variant="titleSmall" style={styles.value}>
-                {location}
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <Text variant="titleSmall" style={styles.title}>
-                Estoque
-              </Text>
-              <Text variant="titleSmall" style={styles.value}>
-                {amount}
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <Text variant="titleSmall" style={styles.title}>
-                Pedido
-              </Text>
-              <Text variant="titleSmall" style={styles.value}>
-                {order}
+                {orderItem.localizacao}
               </Text>
             </View>
           </View>
@@ -78,6 +92,7 @@ const styles = StyleSheet.create({
   sectionContent: {
     marginLeft: 12,
     flex: 1,
+    gap: 12,
   },
   row: {
     flexDirection: "row",
@@ -90,7 +105,6 @@ const styles = StyleSheet.create({
     color: theme.colors.title[800],
   },
   section: {
-    flex: 1,
     marginRight: 16,
   },
 });
