@@ -6,9 +6,9 @@ PODS:
   - EXImageLoader (4.7.0):
     - ExpoModulesCore
     - React-Core
-  - Expo (51.0.11):
+  - Expo (51.0.14):
     - ExpoModulesCore
-  - ExpoAsset (10.0.8):
+  - ExpoAsset (10.0.9):
     - ExpoModulesCore
   - ExpoCamera (15.0.11):
     - ExpoModulesCore
@@ -26,7 +26,7 @@ PODS:
     - ExpoModulesCore
   - ExpoKeepAwake (13.0.2):
     - ExpoModulesCore
-  - ExpoModulesCore (1.12.14):
+  - ExpoModulesCore (1.12.15):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1548,8 +1548,8 @@ SPEC CHECKSUMS:
   DoubleConversion: 76ab83afb40bddeeee456813d9c04f67f78771b5
   EXConstants: 409690fbfd5afea964e5e9d6c4eb2c2b59222c59
   EXImageLoader: ab589d67d6c5f2c33572afea9917304418566334
-  Expo: 8af2fbdfe35b232c2361cc9b9f09a5719ceb4635
-  ExpoAsset: 100b840e5dc1e1619df2d7c76441d33fb84a3202
+  Expo: 9c87c876b45a6934894ba5e9353ee94fdba48125
+  ExpoAsset: 39e60dc31b16e204a9949caf3edb6dcda322e667
   ExpoCamera: 06b98940743afa41fdbb8b8240c87a8b5e30cf26
   ExpoClipboard: 23d203f5d4843699fbc45be1cc4fe1fbd811a6fa
   ExpoFileSystem: 80bfe850b1f9922c16905822ecbf97acd711dc51
@@ -1557,7 +1557,7 @@ SPEC CHECKSUMS:
   ExpoHead: 430fba41a1d7a4f7bd440291ae992bd8e0f8d5e2
   ExpoImagePicker: dc3e6f221ce5717e6e0a771780e6e7d50a790189
   ExpoKeepAwake: 3b8815d9dd1d419ee474df004021c69fdd316d08
-  ExpoModulesCore: d7b31b6d68b2ba815c46660d86018c789178fdb9
+  ExpoModulesCore: 54c85b57000a2a82e5212d5e42cd7a36524be4ac
   EXSplashScreen: fbf0ec78e9cee911df188bf17b4fe51d15a84b87
   FBLazyVector: 4bc164e5b5e6cfc288d2b5ff28643ea15fa1a589
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
