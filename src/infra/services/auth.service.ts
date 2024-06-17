@@ -18,6 +18,7 @@ export async function authSignIn(username: string, password: string) {
     const response = await api.get<AuthSignResponse>(
       `login/?v_usuario=${username}&v_senha=${password}`,
     );
+
     return response;
   } catch (error) {
     throw error;

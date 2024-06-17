@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Auth, authSignIn } from "@/infra/services/auth.service";
 import { PROMETHEUS_SESSION } from "@/constants";
+import { Alert } from "react-native";
 
 type SessionData = {
   authSession?: Auth;
@@ -28,6 +29,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
 
   const signIn = useCallback(async (username: string, password: string) => {
     try {
+      Alert.alert(`Dados: ${username}-${password}`);
       const response = await authSignIn(username, password);
       if (response?.error) {
         throw response;
