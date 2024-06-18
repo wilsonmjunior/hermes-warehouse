@@ -1,6 +1,6 @@
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useRef } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import {
@@ -118,5 +118,6 @@ const styles = StyleSheet.create({
   buttons: {
     flex: 1,
     justifyContent: "flex-end",
+    marginBottom: Platform.OS === "android" ? 16 : 0,
   },
 });

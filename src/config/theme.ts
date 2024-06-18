@@ -9,10 +9,10 @@ const fonts = Object.fromEntries(
     {
       ...variantProps,
       fontFamily: BOLD.find((f) => variantName.toLowerCase().includes(f))
-        ? "Inter_SemiBold"
+        ? "Inter_Bold"
         : REGULAR.find((f) => variantName.toLowerCase().includes(f))
-          ? "Inter_Regular"
-          : "Inter_Light",
+          ? "Inter_400Regular"
+          : "Inter_500Medium",
     },
   ]),
 );
@@ -22,32 +22,32 @@ export const theme = {
   fonts: {
     ...fonts,
     default: {
-      fontFamily: "Inter_Regular",
+      fontFamily: "Inter_400Regular",
       fontSize: 16,
     },
     titleSmall: {
-      fontFamily: "Inter_Regular",
+      fontFamily: "Inter_400Regular",
       fontSize: 14,
       fontWeight: "400",
       letterSpacing: 0.1,
       lineHeight: 20,
     },
     titleMedium: {
-      fontFamily: "Inter_Medium",
+      fontFamily: "Inter_500Medium",
       fontSize: 16,
       fontWeight: "500",
       letterSpacing: 0.15,
       lineHeight: 24,
     },
     titleLarge: {
-      fontFamily: "Inter_SemiBold",
+      fontFamily: "Inter_600SemiBold",
       fontSize: 24,
       fontWeight: "600",
       letterSpacing: 0,
       lineHeight: 28,
     },
     labelLarge: {
-      fontFamily: "Inter_Medium",
+      fontFamily: "Inter_500Medium",
       fontSize: 14,
       fontWeight: "500",
       letterSpacing: 0.1,

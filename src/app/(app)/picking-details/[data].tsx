@@ -45,14 +45,14 @@ export default function PickingDetailsScreen() {
         setLoading(true);
         const [company, order, item] = data.split("-");
         const response = await getOrder({ company, orderId: order, item });
-        if (response.error) {
+        if (response.data?.error) {
           Toast.show({
             text1: "Erro ao localizar pedido",
-            text2: response.error,
+            text2: response.data?.error,
             type: "error",
           });
         }
-        setOrderData(response.pedido);
+        setOrderData(response.data.pedido);
       } catch (error) {
         Toast.show({
           text1: "Erro ao buscar detalhes do item.",

@@ -57,7 +57,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   label: {
-    fontFamily: "Inter-SemiBold",
+    fontFamily: "Inter_600SemiBold",
     fontSize: 16,
   },
 });

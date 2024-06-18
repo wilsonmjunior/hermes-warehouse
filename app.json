@@ -22,10 +22,14 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "INTERNET"
       ],
-      "package": "com.wilsonmjuniorx.prometheus"
+      "package": "com.wilsonmjuniorx.prometheus",
+      "versionCode": 9
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +42,21 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 34,
+            "targetSdkVersion": 34,
+            "buildToolsVersion": "33.0.0",
+            "minSdkVersion": 24
+          },
+          "ios": {
+            "useFrameworks": "static",
+            "useModularHeaders": true
+          }
+        }
       ]
     ],
     "extra": {
@@ -47,6 +66,10 @@
       "eas": {
         "projectId": "fe4f88cb-bab8-4925-9f0d-36ab391d0cff"
       }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/fe4f88cb-bab8-4925-9f0d-36ab391d0cff"
     }
   }
 }

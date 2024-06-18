@@ -16,15 +16,15 @@ export default function Expedition() {
     try {
       setLoading(true);
       const response = await getFullOrder({ orderId });
-      if (response.error) {
+      if (response.data?.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",
           type: "error",
-          text2: response.error,
+          text2: response.data?.error,
         });
         return;
       }
-      setData(response.pedido);
+      setData(response.data.pedido);
     } catch (error) {
     } finally {
       setLoading(false);
