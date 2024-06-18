@@ -20,7 +20,7 @@ export function InputPassword({
       label={label}
       secureTextEntry={secureTextEntry}
       autoComplete="off"
-      textContentType="oneTimeCode" /// newPassword
+      textContentType="newPassword"
       autoCapitalize="none"
       right={
         <TextInput.Icon

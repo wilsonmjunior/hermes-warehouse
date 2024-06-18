@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.white,
     fontSize: 14,
-    height: 56,
   },
   outline: {
     borderRadius: 8,

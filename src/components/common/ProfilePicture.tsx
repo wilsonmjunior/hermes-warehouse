@@ -30,7 +30,7 @@ export function ProfilePicture({
             label={name}
             labelStyle={{
               color: theme.colors.title[600],
-              fontFamily: "Poppins_Medium",
+              fontFamily: "Inter_500Medium",
               fontSize: 50,
             }}
             style={styles.avatar}

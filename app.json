@@ -24,7 +24,8 @@
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.wilsonmjuniorx.prometheus"
+      "package": "com.wilsonmjuniorx.prometheus",
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -46,6 +47,12 @@
       "eas": {
         "projectId": "fe4f88cb-bab8-4925-9f0d-36ab391d0cff"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/fe4f88cb-bab8-4925-9f0d-36ab391d0cff"
     }
   }
 }

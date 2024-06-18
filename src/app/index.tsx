@@ -16,8 +16,8 @@ import { Button, Input, InputPassword } from "@/components/common";
 import { useSession } from "@/context";
 
 export default function SignIn() {
-  const [username, setUsername] = useState("suporte@tecmil.com.br");
-  const [password, setPassword] = useState("3318813ee21eaf7b6f45a31965e9085f");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const { signIn } = useSession();
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     marginTop: 8,
+    marginBottom: 16,
   },
   logo: {
     flex: 1,

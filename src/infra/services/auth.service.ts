@@ -1,3 +1,5 @@
+import md5 from "md5";
+
 import api from "../api";
 
 export type Auth = {
@@ -15,8 +17,10 @@ type AuthSignResponse = {
 
 export async function authSignIn(username: string, password: string) {
   try {
+    const hashPassword = md5(password);
+
     const response = await api.get<AuthSignResponse>(
-      `login/?v_usuario=${username}&v_senha=${password}`,
+      `login/?v_usuario=${username}&v_senha=${hashPassword}`,
     );
 
     return response;
