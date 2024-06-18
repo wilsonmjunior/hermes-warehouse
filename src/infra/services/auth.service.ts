@@ -1,6 +1,6 @@
 import md5 from "md5";
 
-import api from "../api";
+import { api } from "../api";
 
 export type Auth = {
   access_token: string;

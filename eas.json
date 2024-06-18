@@ -6,7 +6,7 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "http://outcenter.tecmil.com.br:35080/api_wms_dev"
+        "EXPO_PUBLIC_API_URL": "https://prometheus.ind.br/api_wms_dev/"
       },
       "autoIncrement": true,
       "channel": "preview"
