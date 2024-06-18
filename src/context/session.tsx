@@ -8,11 +8,12 @@ import {
 import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { Auth, authSignIn } from "@/infra/services/auth.service";
 import { PROMETHEUS_SESSION } from "@/constants";
+import { Auth, authSignIn } from "@/infra/services/auth.service";
 
 type SessionData = {
   authSession?: Auth;
+  loading: boolean;
   signIn(username: string, password: string): Promise<void>;
   signOut(): void;
 };
@@ -25,23 +26,29 @@ export const SessionContext = createContext({} as SessionData);
 
 export function SessionProvider({ children }: SessionProviderProps) {
   const [authSession, setAuthSession] = useState<Auth>();
+  const [loading, setLoading] = useState(false);
 
   const signIn = useCallback(async (username: string, password: string) => {
     try {
+      setLoading(true);
       const response = await authSignIn(username, password);
-      if (response?.error) {
-        throw response;
+      if (response.data.error) {
+        throw response.data.error;
       }
 
-      setAuthSession(response.success?.auth);
+      setAuthSession(response.data.success?.auth);
+
       await AsyncStorage.setItem(
         PROMETHEUS_SESSION,
-        JSON.stringify(response.success?.auth),
+        JSON.stringify(response.data.success?.auth),
       );
+
       router.push("(app)");
     } catch (error) {
-      console.warn("error:: ", error.error);
+      console.warn("error:: ", error);
       throw error;
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -65,7 +72,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
   }, []);
 
   return (
-    <SessionContext.Provider value={{ authSession, signIn, signOut }}>
+    <SessionContext.Provider value={{ authSession, loading, signIn, signOut }}>
       {children}
     </SessionContext.Provider>
   );
