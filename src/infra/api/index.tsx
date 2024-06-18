@@ -1,4 +1,3 @@
-import { Alert } from "react-native";
 import { IResponse } from "../types";
 
 type Method = "GET" | "POST" | "PUT" | "DELETE";
@@ -18,8 +17,6 @@ async function call<T, Params>(
   body?: Params,
 ): Promise<T> {
   try {
-    Alert.alert(`Dados: ${process.env.EXPO_PUBLIC_API_URL}/${url}`);
-
     let response = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/${url}`, {
       method,
       headers: {
