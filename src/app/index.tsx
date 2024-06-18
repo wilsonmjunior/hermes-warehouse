@@ -16,22 +16,22 @@ import { Button, Input, InputPassword } from "@/components/common";
 import { useSession } from "@/context";
 
 export default function SignIn() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState<string>();
+  const [password, setPassword] = useState<string>();
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-  const { signIn } = useSession();
+  const { loading, signIn } = useSession();
 
   const handleSignIn = async () => {
     try {
-      if (!username && !password) {
-        return Toast.show({
-          text1: "Usuário ou senha não forma informados.",
-          type: "error",
-        });
+      if (username && password) {
+        return await signIn(username, password);
       }
 
-      await signIn(username, password);
+      Toast.show({
+        text1: "Usuário ou senha não forma informados.",
+        type: "error",
+      });
     } catch (error) {
       Toast.show({
         text1: "Erro ao fazer login.",
@@ -69,7 +69,7 @@ export default function SignIn() {
             />
 
             <View style={styles.buttons}>
-              <Button label="Entrar" onPress={handleSignIn} />
+              <Button label="Entrar" loading={loading} onPress={handleSignIn} />
             </View>
           </View>
         </ScrollView>
