@@ -8,9 +8,9 @@ import { theme } from "@/config/theme";
 import { Order } from "@/infra/services/order.service";
 import { toCamelCaseWithFirstUpper } from "@/utils/camel-case";
 
-import { ExpeditionTraceability } from "./ExpeditionTraceability";
+import { PickingTraceability } from "./PickingTraceability";
 
-export function ExpeditionDetails({ data }: { data: Order }) {
+export function PickingDetails({ data }: { data: Order }) {
   const handlePicking = (item: string) => {
     const order = data.id.replace(" ", "");
     router.push(`picking-details/${order}-${item}`);
@@ -34,12 +34,12 @@ export function ExpeditionDetails({ data }: { data: Order }) {
 
       <View style={styles.traceability}>
         {data.itens.map((item, index) => (
-          <ExpeditionTraceability
+          <PickingTraceability
             key={index}
-            amount={item.qtd_sep}
+            amountBalance={item.saldo}
+            amountPicking={item.qtd_sep}
             location={item.localizacao}
             item={item.item}
-            order={item.codigo}
             reference={toCamelCaseWithFirstUpper(item.referencia)}
             onPicking={handlePicking}
           />
