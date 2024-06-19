@@ -5,23 +5,23 @@ import { theme } from "@/config/theme";
 
 import { Icon } from "../../common/Icon";
 
-type ExpeditionTraceabilityProps = {
-  amount: string;
+type PickingTraceabilityProps = {
+  amountBalance: string;
+  amountPicking: string;
   location: string;
   item: string;
-  order: string;
   reference: string;
   onPicking(item: string): void;
 };
 
-export function ExpeditionTraceability({
-  amount,
+export function PickingTraceability({
+  amountPicking,
   location,
   item,
-  order,
+  amountBalance,
   reference,
   onPicking,
-}: ExpeditionTraceabilityProps) {
+}: PickingTraceabilityProps) {
   return (
     <TouchableOpacity
       activeOpacity={0.75}
@@ -48,7 +48,7 @@ export function ExpeditionTraceability({
                 Quantidade
               </Text>
               <Text variant="titleSmall" style={styles.value}>
-                {amount}
+                {amountBalance}
               </Text>
             </View>
             <View style={styles.section}>
@@ -56,7 +56,7 @@ export function ExpeditionTraceability({
                 Separado
               </Text>
               <Text variant="titleSmall" style={styles.value}>
-                {order}
+                {amountPicking}
               </Text>
             </View>
           </View>

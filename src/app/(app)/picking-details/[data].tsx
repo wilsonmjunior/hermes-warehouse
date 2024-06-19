@@ -21,7 +21,7 @@ export default function PickingDetailsScreen() {
   const { data } = useLocalSearchParams<PickingDetailsScreenProps>();
 
   const handleChangeData = (data: string) => {
-    const [_, location] = data.split(":");
+    const location = data;
     const itemFounded = orderData?.itens.find(({ item }) => item);
     if (location !== itemFounded?.localizacao) {
       Toast.show({
