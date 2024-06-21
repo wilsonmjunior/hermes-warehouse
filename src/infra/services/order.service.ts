@@ -22,8 +22,6 @@ export type Order = {
 };
 
 export type GetOrderParams = {
-  action?: string;
-  company: string;
   item?: string;
   orderId: string;
 };
@@ -33,15 +31,10 @@ type OrderResponse = {
   pedido?: Order;
 };
 
-export async function getOrder({
-  action,
-  company,
-  item = "0",
-  orderId,
-}: GetOrderParams) {
+export async function getOrderItem({ orderId, item = "0" }: GetOrderParams) {
   try {
     const response = await api.get<OrderResponse>(
-      `pedido/?v_empresa=${company}&v_pedido=${orderId}&v_item=${item}&v_acao=${action}`,
+      `pedido/?v_pedido=${orderId}&v_item=${item}`,
     );
     return response;
   } catch (error) {
@@ -56,15 +49,17 @@ type GetFullOrderParams = {
   orderId: string;
 };
 
-export async function getFullOrder({
+export async function pickingOrderItem({
   orderId,
   item = "0",
   action,
 }: GetFullOrderParams) {
   try {
-    const response = await api.get<OrderResponse>(
-      `pedido/?v_pedido=${orderId}&v_item=${item}&v_acao=${action}`,
-    );
+    const response = await api.post<OrderResponse>(`app/pedido`, {
+      pedido: orderId,
+      item,
+      acao: action,
+    });
     return response;
   } catch (error) {
     console.log("error service: ", error);

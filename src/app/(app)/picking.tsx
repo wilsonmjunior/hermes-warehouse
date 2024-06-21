@@ -6,7 +6,7 @@ import Toast from "react-native-toast-message";
 import { Header, Loading, QrCodeButton } from "@/components/common";
 import { PickingDetails } from "@/components/Screens/Picking";
 import { theme } from "@/config/theme";
-import { Order, getFullOrder } from "@/infra/services/order.service";
+import { Order, getOrderItem } from "@/infra/services/order.service";
 
 export default function Picking() {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ export default function Picking() {
   async function loadOrder(orderId: string) {
     try {
       setLoading(true);
-      const response = await getFullOrder({ orderId });
+      const response = await getOrderItem({ orderId });
       if (response.data?.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",
