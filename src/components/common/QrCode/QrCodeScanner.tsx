@@ -1,11 +1,11 @@
 import { StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { CameraView } from "expo-camera";
 import { useState } from "react";
 
 import QrCode from "@/assets/qr.svg";
 
 import { theme } from "@/config/theme";
-import { getStatusBarHeight } from "@/utils/status-bottom";
 
 import { Header } from "../Header";
 
@@ -29,7 +29,7 @@ export function QrCodeScanner({ onChangeData, onClose }: QrCodeScannerProps) {
   };
 
   return (
-    <View style={StyleSheet.absoluteFillObject}>
+    <SafeAreaView style={[StyleSheet.absoluteFillObject, styles.container]}>
       <Header
         title="Escanear QR Code"
         textColor={theme.colors.white}
@@ -50,14 +50,16 @@ export function QrCodeScanner({ onChangeData, onClose }: QrCodeScannerProps) {
           </CameraView>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: theme.colors.primary[600],
+  },
   header: {
     backgroundColor: theme.colors.primary[600],
-    paddingTop: getStatusBarHeight,
     borderBottomWidth: 0,
   },
   scannerContainer: {
