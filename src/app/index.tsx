@@ -36,7 +36,7 @@ export default function SignIn() {
       Toast.show({
         text1: "Erro ao fazer login.",
         type: "error",
-        text2: error.error,
+        text2: error?.data?.error,
       });
     }
   };

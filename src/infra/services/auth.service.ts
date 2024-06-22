@@ -18,7 +18,6 @@ type AuthSignResponse = {
 export async function authSignIn(email: string, password: string) {
   try {
     const hashPassword = md5(password);
-
     const response = await api.post<AuthSignResponse>("app/login", {
       email,
       password: hashPassword,
@@ -26,6 +25,7 @@ export async function authSignIn(email: string, password: string) {
 
     return response;
   } catch (error) {
-    throw error;
+    console.warn("auth error ", error);
+    throw error.response;
   }
 }
