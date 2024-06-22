@@ -10,7 +10,12 @@ export default function HomeLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        gestureEnabled: false,
+      }}
+    >
       <Stack.Screen name="index" />
       <Stack.Screen name="notifications" />
       <Stack.Screen name="picking" />

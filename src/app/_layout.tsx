@@ -39,7 +39,7 @@ export default function RootLayout() {
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <PaperProvider theme={theme}>
         <SessionProvider>
-          <Slot />
+          <Slot screenOptions={{ gestureEnabled: false }} />
         </SessionProvider>
         <Toast />
       </PaperProvider>
