@@ -19,7 +19,7 @@ export type ButtonProps = Omit<NativePaper.ButtonProps, "children"> & {
 export function Button({
   label,
   mode,
-  size = "md",
+  size = "lg",
   style,
   buttonColor,
   labelStyle,
@@ -30,10 +30,12 @@ export function Button({
   return (
     <NativePaper.Button
       mode={mode || "contained"}
+      contentStyle={{
+        height: SIZE_HEIGHT[size],
+      }}
       style={[
         styles.container,
         {
-          // height: SIZE_HEIGHT[size],
           borderColor: mode === "outlined" ? theme.colors.gray[200] : "none",
         },
       ]}
@@ -53,7 +55,6 @@ export function Button({
 export const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
-    height: 56,
     justifyContent: "center",
   },
   label: {
