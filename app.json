@@ -44,6 +44,12 @@
         }
       ],
       [
+        "expo-image-picker",
+        {
+          "photosPermission": "Permitir que o ${PRODUCT_NAME} acesse suas fotos"
+        }
+      ],
+      [
         "expo-build-properties",
         {
           "android": {
