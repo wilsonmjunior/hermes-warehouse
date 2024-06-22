@@ -6,7 +6,8 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://prometheus.ind.br/api_wms_dev/"
+        "EXPO_PUBLIC_API_URL": "https://prometheus.ind.br/api_wms_dev/",
+        "EXPO_PUBLIC_PWM_API_URL": "https://prometheus.ind.br/api_wms_dev"
       },
       "autoIncrement": true,
       "channel": "preview"
