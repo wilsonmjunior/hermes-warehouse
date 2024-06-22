@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PROMETHEUS_SESSION } from "@/constants";
@@ -28,6 +28,8 @@ export function SessionProvider({ children }: SessionProviderProps) {
   const [authSession, setAuthSession] = useState<Auth>();
   const [loading, setLoading] = useState(false);
 
+  const navigation = useNavigation();
+
   const signIn = useCallback(async (username: string, password: string) => {
     try {
       setLoading(true);
@@ -43,7 +45,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
         JSON.stringify(response.data.success?.auth),
       );
 
-      router.push("(app)");
+      router.navigate("(app)");
     } catch (error) {
       console.log("session error:: ", error);
       throw error;
@@ -55,8 +57,9 @@ export function SessionProvider({ children }: SessionProviderProps) {
   const signOut = useCallback(async () => {
     await AsyncStorage.clear();
     setAuthSession(undefined);
-    router.push("/");
-  }, []);
+    navigation.removeListener("state", () => {});
+    router.navigate("/");
+  }, [navigation]);
 
   useEffect(() => {
     async function load() {
@@ -64,7 +67,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
       if (response) {
         const authData = JSON.parse(response);
         setAuthSession(authData);
-        router.push("(app)");
+        router.navigate("(app)");
       }
     }
 
