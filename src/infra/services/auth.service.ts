@@ -15,13 +15,14 @@ type AuthSignResponse = {
   };
 };
 
-export async function authSignIn(username: string, password: string) {
+export async function authSignIn(email: string, password: string) {
   try {
     const hashPassword = md5(password);
 
-    const response = await api.get<AuthSignResponse>(
-      `login/?v_usuario=${username}&v_senha=${hashPassword}`,
-    );
+    const response = await api.post<AuthSignResponse>("app/login", {
+      email,
+      password: hashPassword,
+    });
 
     return response;
   } catch (error) {
