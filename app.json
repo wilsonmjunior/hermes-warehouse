@@ -14,7 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.wilsonmjuniorx.prometheus"
+      "bundleIdentifier": "com.wilsonmjuniorx.prometheus",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Precisamos acessar sua câmera para tirar fotos e gravar vídeos."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -22,10 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "permissions": [
-        "ACCESS_FINE_LOCATION",
         "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
         "INTERNET"
       ],
       "package": "com.wilsonmjuniorx.prometheus",
@@ -40,7 +40,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
+          "cameraPermission": "Permitir que o $(PRODUCT_NAME) acesse sua câmera"
         }
       ],
       [
