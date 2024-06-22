@@ -45,7 +45,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
 
       router.push("(app)");
     } catch (error) {
-      console.warn("error:: ", error);
+      console.log("session error:: ", error);
       throw error;
     } finally {
       setLoading(false);

@@ -32,8 +32,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
 
       router.back();
     } catch (error) {
-      console.warn("error::", error);
-
+      console.log("picking error::", error);
       Toast.show({
         text1: "Erro ao separar produto.",
         text2: error,

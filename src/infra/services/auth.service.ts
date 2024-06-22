@@ -25,7 +25,7 @@ export async function authSignIn(email: string, password: string) {
 
     return response;
   } catch (error) {
-    console.warn("auth error ", error);
+    console.log("auth error:", error);
     throw error.response;
   }
 }
