@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
-import { FAB, Text } from "react-native-paper";
+import { FAB } from "react-native-paper";
 import { Camera } from "expo-camera";
 
-import { Icon, QrCodeScanner } from "@/components/common";
+import {
+  CameraPermissionDenied,
+  Icon,
+  Loading,
+  QrCodeScanner,
+} from "@/components/common";
 import { theme } from "@/config/theme";
 
 type QrCodeButtonProps = {
@@ -26,10 +31,13 @@ export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Loading />;
   }
+
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return (
+      <CameraPermissionDenied message="Permissão de câmera não concedida. Por favor, permita o acesso à câmera nas configurações do seu dispositivo." />
+    );
   }
 
   return (

@@ -1,6 +1,7 @@
 export { BottomModal } from "./BottomModal";
 export { Button } from "./Button";
 export { Card } from "./Card";
+export { CameraPermissionDenied } from "./CameraPermissionDenied";
 export { Header } from "./Header";
 export { Icon, IconType } from "./Icon";
 export { Input } from "./Input";
@@ -12,4 +13,3 @@ export { ProfileImageUploader } from "./ProfileImageUploader";
 export { ProfilePicture } from "./ProfilePicture";
 export { QrCodeButton, QrCodeScanner } from "./QrCode";
 export { SectionItem } from "./SectionItem";
-export { PickingTraceability } from "../Screens/Separation/PickingTraceability";
