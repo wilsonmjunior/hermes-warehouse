@@ -1,14 +1,7 @@
+import React from "react";
 import * as PhosphorIcons from "phosphor-react-native";
 
-const IconSets = {
-  PhosphorIcons,
-};
-
-export type IconSetsKeys = keyof typeof IconSets;
-
-type PhosphorIconsKeys = keyof typeof PhosphorIcons;
-
-export type IconType = PhosphorIconsKeys;
+export type IconType = keyof typeof PhosphorIcons;
 
 interface IconProps {
   name: IconType;
@@ -17,7 +10,15 @@ interface IconProps {
 }
 
 export function Icon({ name, size = 24, color = "black" }: IconProps) {
-  const IconComponent = PhosphorIcons[name as PhosphorIconsKeys];
+  const IconComponent = PhosphorIcons[name] as React.ComponentType<{
+    size: number;
+    color: string;
+    style?: object;
+  }>;
+
+  if (!IconComponent) {
+    return null;
+  }
 
   return <IconComponent size={size} color={color} />;
 }
