@@ -7,7 +7,7 @@ import Toast from "react-native-toast-message";
 import { Header, Loading, QrCodeButton } from "@/components/common";
 import { PickingDetails } from "@/components/Screens/Separation";
 import { theme } from "@/config/theme";
-import { Order, getOrder } from "@/infra/services/order.service";
+import { Order, getOrderItem } from "@/infra/services/order.service";
 
 type PickingDetailsScreenProps = {
   data: string;
@@ -43,8 +43,8 @@ export default function PickingDetailsScreen() {
     async function loadOrder(data: string) {
       try {
         setLoading(true);
-        const [company, order, item] = data.split("-");
-        const response = await getOrder({ company, orderId: order, item });
+        const [_, order, item] = data.split("-");
+        const response = await getOrderItem({ orderId: order, item });
         if (response.data?.error) {
           Toast.show({
             text1: "Erro ao localizar pedido",
