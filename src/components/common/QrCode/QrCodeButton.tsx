@@ -6,7 +6,6 @@ import { Camera } from "expo-camera";
 import {
   CameraPermissionDenied,
   Icon,
-  Loading,
   QrCodeScanner,
 } from "@/components/common";
 import { theme } from "@/config/theme";
@@ -29,10 +28,6 @@ export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
   const handleOpenScan = () => {
     setOpen(!open);
   };
-
-  if (hasPermission === null) {
-    return <Loading />;
-  }
 
   if (hasPermission === false) {
     return (
