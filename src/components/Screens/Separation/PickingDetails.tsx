@@ -11,7 +11,7 @@ import {
   Button,
 } from "@/components/common";
 import { theme } from "@/config/theme";
-import { Order, getFullOrder } from "@/infra/services/order.service";
+import { Order, pickingOrderItem } from "@/infra/services/order.service";
 
 type PickingDetailsProps = { data: Order; isPicking: boolean };
 
@@ -21,7 +21,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
   const handlePicking = async () => {
     try {
       const orderId = data.id.replace(" ", "");
-      const response = await getFullOrder({
+      const response = await pickingOrderItem({
         orderId,
         item: item.item,
         action: "S",
