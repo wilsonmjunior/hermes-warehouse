@@ -5,7 +5,7 @@ import { useLocalSearchParams } from "expo-router";
 import Toast from "react-native-toast-message";
 
 import { Header, Loading, QrCodeButton } from "@/components/common";
-import { PickingDetails } from "@/components/Screens/Separation";
+import { PickingDetails } from "@/components/Screens/Picking";
 import { theme } from "@/config/theme";
 import { Order, getOrderItem } from "@/infra/services/order.service";
 
@@ -21,9 +21,8 @@ export default function PickingDetailsScreen() {
   const { data } = useLocalSearchParams<PickingDetailsScreenProps>();
 
   const handleChangeData = (data: string) => {
-    const location = data;
     const itemFounded = orderData?.itens.find(({ item }) => item);
-    if (location !== itemFounded?.localizacao) {
+    if (data !== itemFounded?.localizacao) {
       Toast.show({
         text1: "Item em localização diferente.",
         type: "error",
@@ -43,8 +42,8 @@ export default function PickingDetailsScreen() {
     async function loadOrder(data: string) {
       try {
         setLoading(true);
-        const [_, order, item] = data.split("-");
-        const response = await getOrderItem({ orderId: order, item });
+        const [company, order, item] = data.split("-");
+        const response = await getOrderItem({ company, item, orderId: order });
         if (response.data?.error) {
           Toast.show({
             text1: "Erro ao localizar pedido",

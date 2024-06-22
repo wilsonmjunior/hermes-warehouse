@@ -1,4 +1,4 @@
-import { api } from "../api";
+import { api, apiPwm } from "../api";
 
 export type OrderItem = {
   item: string;
@@ -22,6 +22,7 @@ export type Order = {
 };
 
 export type GetOrderParams = {
+  company: string;
   item?: string;
   orderId: string;
 };
@@ -31,11 +32,16 @@ type OrderResponse = {
   pedido?: Order;
 };
 
-export async function getOrderItem({ orderId, item = "0" }: GetOrderParams) {
+export async function getOrderItem({
+  company,
+  item = "0",
+  orderId,
+}: GetOrderParams) {
   try {
-    const response = await api.get<OrderResponse>(
-      `pedido/?v_pedido=${orderId}&v_item=${item}`,
+    const response = await apiPwm.get<OrderResponse>(
+      `pedido/?v_empresa=${company}&v_pedido=${orderId}&v_item=${item}`,
     );
+
     return response;
   } catch (error) {
     console.log("error service: ", error);
@@ -60,9 +66,10 @@ export async function pickingOrderItem({
       item,
       acao: action,
     });
+
     return response;
   } catch (error) {
     console.log("error service: ", error);
-    throw error;
+    throw error.response;
   }
 }

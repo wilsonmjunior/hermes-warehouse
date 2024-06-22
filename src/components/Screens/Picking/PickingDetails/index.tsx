@@ -4,19 +4,17 @@ import { Text } from "react-native-paper";
 import Toast from "react-native-toast-message";
 import { router } from "expo-router";
 
-import {
-  SectionItem,
-  ProductCode,
-  PickingTraceability,
-  Button,
-} from "@/components/common";
+import { SectionItem, ProductCode, Button } from "@/components/common";
 import { theme } from "@/config/theme";
 import { Order, pickingOrderItem } from "@/infra/services/order.service";
+import { PickingTraceability } from "./PickingTraceability";
 
 type PickingDetailsProps = { data: Order; isPicking: boolean };
 
 export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
   const item = useMemo(() => data.itens[0], [data.itens]);
+
+  const action = useMemo(() => (item.qtd_sep === "0,00" ? "S" : "X"), [item]);
 
   const handlePicking = async () => {
     try {
@@ -24,7 +22,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
       const response = await pickingOrderItem({
         orderId,
         item: item.item,
-        action: "S",
+        action,
       });
       console.warn("response picking: ", response);
       Toast.show({
@@ -34,6 +32,8 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
 
       router.back();
     } catch (error) {
+      console.warn("error::", error);
+
       Toast.show({
         text1: "Erro ao separar produto.",
         text2: error,
@@ -59,7 +59,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
 
         <View style={styles.buttons}>
           <Button
-            label="Separar"
+            label={action === "S" ? "Separar" : "Cancelar"}
             onPress={handlePicking}
             disabled={isPicking}
           />

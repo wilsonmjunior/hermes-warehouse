@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
 
 import { Header, Loading, QrCodeButton } from "@/components/common";
-import { PickingDetails } from "@/components/Screens/Picking";
+import { PickingListDetails } from "@/components/Screens/Picking";
 import { theme } from "@/config/theme";
 import { Order, getOrderItem } from "@/infra/services/order.service";
 
@@ -13,10 +13,15 @@ export default function Picking() {
   const [data, setData] = useState<Order>();
   const [orderId, setOrderId] = useState<string>();
 
-  async function loadOrder(orderId: string) {
+  async function loadOrder(data: string) {
     try {
       setLoading(true);
-      const response = await getOrderItem({ orderId });
+      const [company, order, item] = data.split("-");
+      const response = await getOrderItem({
+        company,
+        item,
+        orderId: order,
+      });
       if (response.data?.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",
@@ -27,6 +32,10 @@ export default function Picking() {
       }
       setData(response.data.pedido);
     } catch (error) {
+      Toast.show({
+        text1: "Erro ao buscar dados do pedido.",
+        type: "error",
+      });
     } finally {
       setLoading(false);
     }
@@ -48,7 +57,7 @@ export default function Picking() {
     <SafeAreaView style={styles.container}>
       <Header title="Separação" />
 
-      {data ? <PickingDetails data={data} /> : loading ? <Loading /> : null}
+      {data ? <PickingListDetails data={data} /> : loading ? <Loading /> : null}
 
       <QrCodeButton onChangeData={handleChangeData} />
     </SafeAreaView>

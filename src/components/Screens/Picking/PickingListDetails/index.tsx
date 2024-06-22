@@ -10,7 +10,7 @@ import { toCamelCaseWithFirstUpper } from "@/utils/camel-case";
 
 import { PickingTraceability } from "./PickingTraceability";
 
-export function PickingDetails({ data }: { data: Order }) {
+export function PickingListDetails({ data }: { data: Order }) {
   const handlePicking = (item: string) => {
     const order = data.id.replace(" ", "");
     router.push(`picking-details/${order}-${item}`);
