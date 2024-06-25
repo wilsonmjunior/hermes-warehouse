@@ -6,8 +6,7 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://kvlux.prometheus.ind.br/api",
-        "EXPO_PUBLIC_PWM_API_URL": "https://kvlux.prometheus.ind.br/api/API_KVLUX_ES/public/api"
+        "EXPO_PUBLIC_API_URL": "https://kvlux.prometheus.ind.br/api/API_KVLUX_ES/public/api"
       },
       "autoIncrement": true,
       "channel": "preview"
