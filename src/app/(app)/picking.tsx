@@ -16,12 +16,8 @@ export default function Picking() {
   async function loadOrder(data: string) {
     try {
       setLoading(true);
-      const [company, order, item] = data.split("-");
-      const response = await getOrderItem({
-        company,
-        item,
-        orderId: order,
-      });
+
+      const response = await getOrderItem({ order: data });
       if (response.data?.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",
@@ -35,6 +31,7 @@ export default function Picking() {
       Toast.show({
         text1: "Erro ao buscar dados do pedido.",
         type: "error",
+        text2: error.erro,
       });
     } finally {
       setLoading(false);

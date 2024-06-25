@@ -1,4 +1,4 @@
-import { api, apiPwm } from "../api";
+import { api } from "../api";
 
 export type OrderItem = {
   item: string;
@@ -22,9 +22,8 @@ export type Order = {
 };
 
 export type GetOrderParams = {
-  company: string;
   item?: string;
-  orderId: string;
+  order: string;
 };
 
 type OrderResponse = {
@@ -32,15 +31,12 @@ type OrderResponse = {
   pedido?: Order;
 };
 
-export async function getOrderItem({
-  company,
-  item = "0",
-  orderId,
-}: GetOrderParams) {
+export async function getOrderItem({ item = "0", order }: GetOrderParams) {
   try {
-    const response = await api.get<OrderResponse>(
-      `pedido/?v_empresa=${company}&v_pedido=${orderId}&v_item=${item}`,
-    );
+    const response = await api.post<OrderResponse>("app/pedido", {
+      pedido: order,
+      item,
+    });
 
     return response;
   } catch (error) {
@@ -52,17 +48,17 @@ export async function getOrderItem({
 type GetFullOrderParams = {
   action?: string;
   item?: string;
-  orderId: string;
+  order: string;
 };
 
 export async function pickingOrderItem({
-  orderId,
+  order,
   item = "0",
   action,
 }: GetFullOrderParams) {
   try {
-    const response = await apiPwm.post<OrderResponse>(`app/pedido`, {
-      pedido: orderId,
+    const response = await api.post<OrderResponse>(`app/pedido`, {
+      pedido: order,
       item,
       acao: action,
     });

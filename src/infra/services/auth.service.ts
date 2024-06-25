@@ -1,6 +1,6 @@
 import md5 from "md5";
 
-import { apiPwm } from "../api";
+import { api } from "../api";
 
 export type Auth = {
   access_token: string;
@@ -18,7 +18,7 @@ type AuthSignResponse = {
 export async function authSignIn(email: string, password: string) {
   try {
     const hashPassword = md5(password);
-    const response = await apiPwm.post<AuthSignResponse>("app/login", {
+    const response = await api.post<AuthSignResponse>("app/login", {
       email,
       password: hashPassword,
     });
