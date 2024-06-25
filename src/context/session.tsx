@@ -41,7 +41,7 @@ export function SessionProvider({ children }: SessionProviderProps) {
 
       setAuthSession(response.data.success?.auth);
 
-      api.defaults.headers.common.Authorization = `Bearer ${response.data.success?.auth}`;
+      api.defaults.headers.common.Authorization = `Bearer ${response.data.success?.auth.access_token}`;
 
       await AsyncStorage.setItem(
         PROMETHEUS_SESSION,
