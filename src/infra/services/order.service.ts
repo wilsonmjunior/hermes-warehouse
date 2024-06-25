@@ -38,7 +38,7 @@ export async function getOrderItem({
   orderId,
 }: GetOrderParams) {
   try {
-    const response = await apiPwm.get<OrderResponse>(
+    const response = await api.get<OrderResponse>(
       `pedido/?v_empresa=${company}&v_pedido=${orderId}&v_item=${item}`,
     );
 
@@ -61,7 +61,7 @@ export async function pickingOrderItem({
   action,
 }: GetFullOrderParams) {
   try {
-    const response = await api.post<OrderResponse>(`app/pedido`, {
+    const response = await apiPwm.post<OrderResponse>(`app/pedido`, {
       pedido: orderId,
       item,
       acao: action,
