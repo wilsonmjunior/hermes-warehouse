@@ -29,7 +29,7 @@
         "INTERNET"
       ],
       "package": "com.wilsonmjuniorx.prometheus",
-      "versionCode": 19
+      "versionCode": 21
     },
     "web": {
       "favicon": "./assets/favicon.png"

@@ -6,8 +6,8 @@
     "preview": {
       "distribution": "internal",
       "env": {
-        "EXPO_PUBLIC_PWM_API_URL": "https://kvlux.tecmil.com.br:81/API_KVLUX_ES/public/api",
-        "EXPO_PUBLIC_API_URL": "https://prometheus.ind.br/api_wms_dev"
+        "EXPO_PUBLIC_API_URL": "https://kvlux.prometheus.ind.br/api",
+        "EXPO_PUBLIC_PWM_API_URL": "https://kvlux.prometheus.ind.br/api/API_KVLUX_ES/public/api"
       },
       "autoIncrement": true,
       "channel": "preview"
