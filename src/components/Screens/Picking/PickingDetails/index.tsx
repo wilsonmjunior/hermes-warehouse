@@ -30,7 +30,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
         type: "success",
       });
 
-      router.push("picking/true");
+      router.push(`picking/${orderId}`);
     } catch (error) {
       console.log("picking error::", error);
       Toast.show({

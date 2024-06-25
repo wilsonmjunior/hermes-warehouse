@@ -52,7 +52,7 @@ export default function Picking() {
   }, []);
 
   useEffect(() => {
-    const order = params ? params.split("-")[0] : orderId;
+    const order = params && params !== "null" ? params : orderId;
     if (order) {
       loadOrder(order);
     }
