@@ -18,7 +18,7 @@ export default function HomeLayout() {
     >
       <Stack.Screen name="index" />
       <Stack.Screen name="notifications" />
-      <Stack.Screen name="picking" />
+      <Stack.Screen name="picking/[refresh]" />
       <Stack.Screen name="picking-details/[data]" />
       <Stack.Screen name="expedition" />
       <Stack.Screen name="profile" />

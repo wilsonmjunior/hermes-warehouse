@@ -22,8 +22,11 @@ export type Order = {
 };
 
 export type GetOrderParams = {
-  item?: string;
   order: string;
+};
+
+export type GetOrderItemParams = GetOrderParams & {
+  item: string;
 };
 
 type OrderResponse = {
@@ -31,16 +34,43 @@ type OrderResponse = {
   pedido?: Order;
 };
 
-export async function getOrderItem({ item = "0", order }: GetOrderParams) {
+export async function getOrder({ order }: GetOrderParams) {
   try {
     const response = await api.post<OrderResponse>("app/pedido", {
       pedido: order,
-      item,
     });
 
     return response;
   } catch (error) {
     console.log("error service: ", error);
+    throw error;
+  }
+}
+
+export async function getOrderItem({ item, order }: GetOrderItemParams) {
+  try {
+    const response = await getOrder({ order });
+
+    if (response.data.error) {
+      return response;
+    }
+
+    const itemFounded = response.data.pedido?.itens.find(
+      (orderItem) => String(orderItem.item) === item,
+    );
+
+    return {
+      ...response,
+      data: {
+        ...response.data,
+        pedido: {
+          ...response.data.pedido,
+          itens: itemFounded ? [itemFounded] : response.data.pedido?.itens,
+        } as Order,
+      },
+    };
+  } catch (error) {
+    console.log("Error service: ", error);
     throw error;
   }
 }
@@ -53,7 +83,7 @@ type GetFullOrderParams = {
 
 export async function pickingOrderItem({
   order,
-  item = "0",
+  item,
   action,
 }: GetFullOrderParams) {
   try {

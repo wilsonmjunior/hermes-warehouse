@@ -22,7 +22,7 @@ export default function Home() {
             icon={Picking}
             title="Separação"
             onPress={() => {
-              router.navigate("picking");
+              router.navigate("picking/false");
             }}
           />
           <ServiceCard

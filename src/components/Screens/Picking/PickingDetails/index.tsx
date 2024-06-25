@@ -20,17 +20,17 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
     try {
       const orderId = data.id.replace(" ", "");
       const response = await pickingOrderItem({
-        orderId,
+        order: orderId,
         item: item.item,
         action,
       });
-      console.warn("response picking: ", response);
+
       Toast.show({
         text1: "Produto separado com sucesso.",
         type: "success",
       });
 
-      router.back();
+      router.push("picking/true");
     } catch (error) {
       console.log("picking error::", error);
       Toast.show({

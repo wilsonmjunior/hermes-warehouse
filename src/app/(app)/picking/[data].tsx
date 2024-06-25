@@ -2,22 +2,29 @@ import { useCallback, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
+import { useLocalSearchParams } from "expo-router";
 
 import { Header, Loading, QrCodeButton } from "@/components/common";
 import { PickingListDetails } from "@/components/Screens/Picking";
 import { theme } from "@/config/theme";
-import { Order, getOrderItem } from "@/infra/services/order.service";
+import { Order, getOrder } from "@/infra/services/order.service";
+
+type PickingProps = {
+  data: string;
+};
 
 export default function Picking() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<Order>();
   const [orderId, setOrderId] = useState<string>();
 
+  const { data: params } = useLocalSearchParams<PickingProps>();
+
   async function loadOrder(data: string) {
     try {
       setLoading(true);
 
-      const response = await getOrderItem({ order: data });
+      const response = await getOrder({ order: data });
       if (response.data?.error) {
         Toast.show({
           text1: "Erro ao buscar dados do pedido.",
@@ -45,10 +52,11 @@ export default function Picking() {
   }, []);
 
   useEffect(() => {
-    if (orderId) {
-      loadOrder(orderId);
+    const order = params ? params.split("-")[0] : orderId;
+    if (order) {
+      loadOrder(order);
     }
-  }, [orderId]);
+  }, [orderId, params]);
 
   return (
     <SafeAreaView style={styles.container}>

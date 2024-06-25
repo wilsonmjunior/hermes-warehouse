@@ -11,7 +11,6 @@ api.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.warn("error: ", error.response);
     if (error.response.status === 401) {
       await AsyncStorage.clear();
       return router.push("/");

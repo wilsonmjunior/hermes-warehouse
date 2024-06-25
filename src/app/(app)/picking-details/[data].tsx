@@ -39,10 +39,16 @@ export default function PickingDetailsScreen() {
   };
 
   useEffect(() => {
-    async function loadOrder(order: string) {
+    async function loadOrder(data: string) {
       try {
         setLoading(true);
-        const response = await getOrderItem({ item: data, order });
+        const [company, orderId, item] = data.split("-");
+
+        const response = await getOrderItem({
+          item,
+          order: `${company}-${orderId}`,
+        });
+
         if (response.data?.error) {
           Toast.show({
             text1: "Erro ao localizar pedido",
