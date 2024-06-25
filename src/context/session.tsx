@@ -10,6 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { PROMETHEUS_SESSION } from "@/constants";
 import { Auth, authSignIn } from "@/infra/services/auth.service";
+import { api } from "@/infra/api";
 
 type SessionData = {
   authSession?: Auth;
@@ -40,6 +41,8 @@ export function SessionProvider({ children }: SessionProviderProps) {
 
       setAuthSession(response.data.success?.auth);
 
+      api.defaults.headers.common.Authorization = `Bearer ${response.data.success?.auth}`;
+
       await AsyncStorage.setItem(
         PROMETHEUS_SESSION,
         JSON.stringify(response.data.success?.auth),
@@ -65,8 +68,9 @@ export function SessionProvider({ children }: SessionProviderProps) {
     async function load() {
       const response = await AsyncStorage.getItem(PROMETHEUS_SESSION);
       if (response) {
-        const authData = JSON.parse(response);
+        const authData = JSON.parse(response) as Auth;
         setAuthSession(authData);
+        api.defaults.headers.common.Authorization = `Bearer ${authData.access_token}`;
         router.navigate("(app)");
       }
     }
