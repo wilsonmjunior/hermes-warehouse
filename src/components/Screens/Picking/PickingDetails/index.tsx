@@ -26,7 +26,7 @@ export function PickingDetails({ data, isPicking }: PickingDetailsProps) {
       });
 
       Toast.show({
-        text1: "Produto separado com sucesso.",
+        text1: `Produto ${action === "S" ? "separado" : "cancelado"} com sucesso.`,
         type: "success",
       });
 

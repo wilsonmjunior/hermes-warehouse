@@ -4,7 +4,12 @@ import { StyleSheet } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import Toast from "react-native-toast-message";
 
-import { Header, Loading, QrCodeButton } from "@/components/common";
+import {
+  Header,
+  Loading,
+  QrCodeButton,
+  QrCodeScanner,
+} from "@/components/common";
 import { PickingDetails } from "@/components/Screens/Picking";
 import { theme } from "@/config/theme";
 import { Order, getOrderItem } from "@/infra/services/order.service";
@@ -15,6 +20,7 @@ type PickingDetailsScreenProps = {
 
 export default function PickingDetailsScreen() {
   const [orderData, setOrderData] = useState<Order>();
+  const [openOrderItem, setOpenOrderItem] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isPicking, setIsPicking] = useState(true);
 
@@ -30,10 +36,34 @@ export default function PickingDetailsScreen() {
       return;
     }
 
-    setIsPicking(false);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+      setOpenOrderItem(true);
+    }, 500);
 
     Toast.show({
       text1: "Item localizado com sucesso.",
+      type: "success",
+    });
+  };
+
+  const handleChangeOrderItem = (data: string) => {
+    const itemFounded = orderData?.itens.find(({ item }) => item);
+    const [_, code] = data.split("-");
+    if (code !== String(itemFounded?.codigo)) {
+      Toast.show({
+        text1: "O item escaneado é diferente.",
+        type: "error",
+      });
+      return;
+    }
+
+    setIsPicking(false);
+
+    Toast.show({
+      text1: "Item escaneado com sucesso.",
       type: "success",
     });
   };
@@ -78,11 +108,18 @@ export default function PickingDetailsScreen() {
 
       {orderData?.id ? (
         <PickingDetails isPicking={isPicking} data={orderData} />
-      ) : loading ? (
-        <Loading />
       ) : null}
 
       <QrCodeButton onChangeData={handleChangeData} />
+
+      {openOrderItem && (
+        <QrCodeScanner
+          onChangeData={handleChangeOrderItem}
+          onClose={() => setOpenOrderItem(false)}
+        />
+      )}
+
+      {loading && <Loading />}
     </SafeAreaView>
   );
 }
