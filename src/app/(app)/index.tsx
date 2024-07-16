@@ -1,6 +1,8 @@
+import { useEffect } from "react";
+import { Platform, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as QuickActions from "expo-quick-actions";
 
 import Audit from "@/assets/audit.svg";
 import Inventory from "@/assets/inventory.svg";
@@ -11,6 +13,20 @@ import { Header, ServiceCard } from "@/components/Screens/Home";
 
 export default function Home() {
   const router = useRouter();
+
+  useEffect(() => {
+    QuickActions.setItems([
+      {
+        id: "1",
+        title: "Separar",
+        subtitle: "Clique para separar o item",
+        icon: Platform.OS === "ios" ? "symbol:qrcode" : "qrcode",
+        params: {
+          href: "/picking/null",
+        },
+      },
+    ]);
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
