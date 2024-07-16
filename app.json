@@ -64,7 +64,17 @@
           }
         }
       ],
-      "expo-quick-actions"
+      [
+        "expo-quick-actions",
+        {
+          "androidIcons": {
+            "qrcode": {
+              "foregroundImage": "./assets/qrcode.png",
+              "backgroundColor": "#ffffff"
+            }
+          }
+        }
+      ]
     ],
     "extra": {
       "router": {
