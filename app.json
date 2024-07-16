@@ -63,7 +63,8 @@
             "useModularHeaders": true
           }
         }
-      ]
+      ],
+      "expo-quick-actions"
     ],
     "extra": {
       "router": {

@@ -25,6 +25,7 @@
     "expo-font": "~12.0.7",
     "expo-image-picker": "~15.0.5",
     "expo-linking": "~6.3.1",
+    "expo-quick-actions": "^2.0.0",
     "expo-router": "~3.5.16",
     "expo-status-bar": "~1.12.1",
     "expo-system-ui": "~3.0.6",
