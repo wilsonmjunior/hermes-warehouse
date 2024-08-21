@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Toast from "react-native-toast-message";
 import {
   StyleSheet,
@@ -9,11 +9,14 @@ import {
   ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as QuickActions from "expo-quick-actions";
+import { useQuickActionCallback } from "expo-quick-actions/hooks";
 
 import Logo from "@/assets/icons/logo.png";
 
 import { Button, Input, InputPassword } from "@/components/common";
 import { useSession } from "@/context";
+import { router } from "expo-router";
 
 export default function SignIn() {
   const [username, setUsername] = useState<string>();
@@ -21,6 +24,26 @@ export default function SignIn() {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
 
   const { loading, signIn } = useSession();
+
+  useQuickActionCallback((action) => {
+    if (action?.params?.href) {
+      router.push(action.params.href as string);
+    }
+  });
+
+  useEffect(() => {
+    QuickActions.setItems([
+      {
+        id: "1",
+        title: "Separar",
+        subtitle: "Clique para separar o item",
+        icon: Platform.OS === "ios" ? "symbol:qrcode" : "qrcode",
+        params: {
+          href: "/picking/null",
+        },
+      },
+    ]);
+  }, []);
 
   const handleSignIn = async () => {
     try {
