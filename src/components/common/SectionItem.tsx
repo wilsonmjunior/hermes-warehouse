@@ -30,5 +30,7 @@ const styles = StyleSheet.create({
   },
   value: {
     color: theme.colors.title[800],
+    flexShrink: 1,
+    marginLeft: 8,
   },
 });
