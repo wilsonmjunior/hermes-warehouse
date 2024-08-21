@@ -23,12 +23,14 @@ export default function PickingDetailsScreen() {
   const [openOrderItem, setOpenOrderItem] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isPicking, setIsPicking] = useState(true);
+  const [scanTitle, setScanTitle] = useState("Escanear Localização");
 
   const { data } = useLocalSearchParams<PickingDetailsScreenProps>();
 
   const handleChangeData = (data: string) => {
     const itemFounded = orderData?.itens.find(({ item }) => item);
-    if (data !== itemFounded?.localizacao) {
+    if (!itemFounded?.localizacao.includes(data)) {
+      setScanTitle("Escanear Localização");
       Toast.show({
         text1: "Item em localização diferente.",
         type: "error",
@@ -41,6 +43,7 @@ export default function PickingDetailsScreen() {
     setTimeout(() => {
       setLoading(false);
       setOpenOrderItem(true);
+      setScanTitle("Escanear Produto");
     }, 500);
 
     Toast.show({
@@ -66,6 +69,8 @@ export default function PickingDetailsScreen() {
       text1: "Item escaneado com sucesso.",
       type: "success",
     });
+
+    setScanTitle("Escanear Localização");
   };
 
   useEffect(() => {
@@ -88,6 +93,7 @@ export default function PickingDetailsScreen() {
         }
         setOrderData(response.data.pedido);
       } catch (error) {
+        console.warn("error: ", error);
         Toast.show({
           text1: "Erro ao buscar detalhes do item.",
           type: "error",
@@ -110,10 +116,11 @@ export default function PickingDetailsScreen() {
         <PickingDetails isPicking={isPicking} data={orderData} />
       ) : null}
 
-      <QrCodeButton onChangeData={handleChangeData} />
+      <QrCodeButton scanTitle={scanTitle} onChangeData={handleChangeData} />
 
       {openOrderItem && (
         <QrCodeScanner
+          title={scanTitle}
           onChangeData={handleChangeOrderItem}
           onClose={() => setOpenOrderItem(false)}
         />

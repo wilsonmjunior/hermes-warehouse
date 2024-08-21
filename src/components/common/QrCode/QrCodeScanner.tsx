@@ -15,11 +15,16 @@ type BarCodeScannedParams = {
 };
 
 type QrCodeScannerProps = {
+  title?: string;
   onChangeData(value: string): void;
   onClose(): void;
 };
 
-export function QrCodeScanner({ onChangeData, onClose }: QrCodeScannerProps) {
+export function QrCodeScanner({
+  title = "Escanear QR Code",
+  onChangeData,
+  onClose,
+}: QrCodeScannerProps) {
   const [scanned, setScanned] = useState(false);
 
   const handleBarCodeScanned = ({ type, data }: BarCodeScannedParams) => {
@@ -31,7 +36,7 @@ export function QrCodeScanner({ onChangeData, onClose }: QrCodeScannerProps) {
   return (
     <SafeAreaView style={[StyleSheet.absoluteFillObject, styles.container]}>
       <Header
-        title="Escanear QR Code"
+        title={title}
         textColor={theme.colors.white}
         style={styles.header}
         onPress={onClose}

@@ -11,10 +11,11 @@ import {
 import { theme } from "@/config/theme";
 
 type QrCodeButtonProps = {
+  scanTitle?: string;
   onChangeData(data: string): void;
 };
 
-export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
+export function QrCodeButton({ scanTitle, onChangeData }: QrCodeButtonProps) {
   const [open, setOpen] = useState(false);
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
 
@@ -46,6 +47,7 @@ export function QrCodeButton({ onChangeData }: QrCodeButtonProps) {
 
       {open && (
         <QrCodeScanner
+          title={scanTitle}
           onChangeData={onChangeData}
           onClose={() => setOpen(false)}
         />
